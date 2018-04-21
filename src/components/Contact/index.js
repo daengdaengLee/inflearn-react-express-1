@@ -9,24 +9,28 @@ class Contact extends Component {
     this.state = {
       selectedKey: -1,
       keyword: '',
-      contactData: [
-        {
+      contactData: {
+        0: {
+          id: 0,
           name: 'Abet',
           phone: '010-0000-0001',
         },
-        {
+        1: {
+          id: 1,
           name: 'Betty',
           phone: '010-0000-0002',
         },
-        {
+        2: {
+          id: 2,
           name: 'Charlie',
           phone: '010-0000-0003',
         },
-        {
+        3: {
+          id: 3,
           name: 'David',
           phone: '010-0000-0004',
         },
-      ],
+      },
     };
     this._mapToComponents = this._mapToComponents.bind(this);
     this._handleChange = this._handleChange.bind(this);
@@ -39,10 +43,10 @@ class Contact extends Component {
     const sorted = data.slice().sort((a, b) => a.name > b.name);
     return sorted
       .filter(contact => contact.name.toLowerCase().includes(keyword.toLowerCase()))
-      .map((contact, index) => <ContactInfo
+      .map(contact => <ContactInfo
         name={contact.name}
-        key={index}
-        onClick={() => _handleClick(index)} />);
+        key={contact.id}
+        onClick={() => _handleClick(contact.id)} />);
   }
 
   _handleChange(event) {
@@ -68,7 +72,7 @@ class Contact extends Component {
           placeholder="Search"
           value={keyword}
           onChange={_handleChange} />
-        <div>{_mapToComponents(contactData)}</div>
+        <div>{_mapToComponents(Object.values(contactData))}</div>
         <ContactDetails
           isSelected={selectedKey !== -1}
           contact={contactData[selectedKey]} />
