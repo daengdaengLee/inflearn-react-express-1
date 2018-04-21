@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 class ContactInfo extends Component {
   render() {
-    const { contact } = this.props;
+    const { contact, onClick } = this.props;
     return (
-        <div>
-          {contact.name} {contact.phone}
+        <div onClick={onClick}>
+          {contact.name}
         </div>
     );
   }

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import ContactInfo from '../ContactInfo';
+import ContactDetails from '../ContactDetails';
 
 class Contact extends Component {
     
   constructor(props) {
     super(props);
     this.state = {
+      selectedKey: -1,
       keyword: '',
       contactData: [
         {
@@ -28,14 +30,19 @@ class Contact extends Component {
     };
     this._mapToComponents = this._mapToComponents.bind(this);
     this._handleChange = this._handleChange.bind(this);
+    this._handleClick = this._handleClick.bind(this);
   }
   
   _mapToComponents(data) {
+    const { _handleClick } = this;
     const { keyword } = this.state;
     const sorted = data.slice().sort((a, b) => a.name > b.name);
     return sorted
       .filter(contact => contact.name.toLowerCase().includes(keyword.toLowerCase()))
-      .map((contact, index) => <ContactInfo contact={contact} key={index} />);
+      .map((contact, index) => <ContactInfo
+        contact={contact}
+        key={index}
+        onClick={() => _handleClick(index)} />);
   }
 
   _handleChange(event) {
@@ -44,9 +51,15 @@ class Contact extends Component {
     });
   }
 
+  _handleClick(key) {
+    this.setState({
+      selectedKey: key,
+    });
+  }
+
   render() {
     const { _mapToComponents, _handleChange } = this;
-    const { contactData, keyword } = this.state;
+    const { contactData, keyword, selectedKey } = this.state;
     return (
       <div>
         <h1>Contacts</h1>
@@ -56,6 +69,9 @@ class Contact extends Component {
           value={keyword}
           onChange={_handleChange} />
         <div>{_mapToComponents(contactData)}</div>
+        <ContactDetails
+          isSelected={selectedKey !== -1}
+          contact={contactData[selectedKey]} />
       </div>
     );
   }
