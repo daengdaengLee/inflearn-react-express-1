@@ -40,7 +40,7 @@ class Contact extends Component {
     return sorted
       .filter(contact => contact.name.toLowerCase().includes(keyword.toLowerCase()))
       .map((contact, index) => <ContactInfo
-        contact={contact}
+        name={contact.name}
         key={index}
         onClick={() => _handleClick(index)} />);
   }

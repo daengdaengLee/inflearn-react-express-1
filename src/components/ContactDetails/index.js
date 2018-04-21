@@ -1,27 +1,19 @@
-import React, { Component } from 'react';
+import React, { Fragment } from 'react';
 
-class ContactDetails extends Component {
+const Details = ({name, phone}) => (
+  <Fragment>
+    <p>{name}</p>
+    <p>{phone}</p>
+  </Fragment>
+);
+const Blank = () => <p>Not Selected</p>
 
-  render() {
-    const { contact, isSelected } = this.props;
-
-    const details = (
-      <div>
-        <p>{contact.name}</p>
-        <p>{contact.phone}</p>
-      </div>
-    );
-    const blank = <div>Not Selected</div>;
-
-    return (
-      <div>
-        <h2>Details</h2>
-        {isSelected ? details : blank}
-      </div>
-    );
-  }
-
-}
+const ContactDetails = ({contact, isSelected}) => (
+  <div>
+    <h2>Details</h2>
+    {isSelected ? <Details name={contact.name} phone={contact.phone} /> : <Blank />}
+  </div>
+);
 
 ContactDetails.defaultProps = {
   contact: {
