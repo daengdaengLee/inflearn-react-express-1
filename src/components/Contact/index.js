@@ -32,7 +32,8 @@ class Contact extends Component {
   
   _mapToComponents(data) {
     const { keyword } = this.state;
-    return data
+    const sorted = data.slice().sort((a, b) => a.name > b.name);
+    return sorted
       .filter(contact => contact.name.toLowerCase().includes(keyword.toLowerCase()))
       .map((contact, index) => <ContactInfo contact={contact} key={index} />);
   }
