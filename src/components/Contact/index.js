@@ -26,11 +26,15 @@ class Contact extends Component {
         },
       ],
     };
+    this._mapToComponents = this._mapToComponents.bind(this);
     this._handleChange = this._handleChange.bind(this);
   }
   
   _mapToComponents(data) {
-    return data.map((contact, index) => <ContactInfo contact={contact} key={index} />);
+    const { keyword } = this.state;
+    return data
+      .filter(contact => contact.name.toLowerCase().includes(keyword.toLowerCase()))
+      .map((contact, index) => <ContactInfo contact={contact} key={index} />);
   }
 
   _handleChange(event) {
