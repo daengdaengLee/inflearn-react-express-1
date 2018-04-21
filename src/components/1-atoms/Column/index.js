@@ -1,0 +1,11 @@
+import React from 'react';
+import styled from 'styled-components';
+
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Column = ({ children }) => <FlexColumn>{children}</FlexColumn>;
+
+export default Column;
