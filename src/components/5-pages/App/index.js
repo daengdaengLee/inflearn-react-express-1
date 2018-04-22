@@ -42,13 +42,14 @@ class App extends Component {
       },
     };
     this._handleChangeSearch = this._handleChangeSearch.bind(this);
-    this._handelChangeEdit = this._handelChangeEdit.bind(this);
+    this._handleChangeEdit = this._handleChangeEdit.bind(this);
     this._handleChangeCreate = this._handleChangeCreate.bind(this);
     this._handleClickList = this._handleClickList.bind(this);
     this._handleClickEdit = this._handleClickEdit.bind(this);
     this._handleClickSave = this._handleClickSave.bind(this);
     this._handleClickDelete = this._handleClickDelete.bind(this);
     this._handleClickCreate = this._handleClickCreate.bind(this);
+    this._handleKeyPress = this._handleKeyPress.bind(this);
   }
 
   _handleChangeSearch(value) {
@@ -57,7 +58,7 @@ class App extends Component {
     });
   }
 
-  _handelChangeEdit(target, value) {
+  _handleChangeEdit(target, value) {
     this.setState(prevState => {
       return {
         selectedContact: {
@@ -141,17 +142,28 @@ class App extends Component {
     });
   }
 
+  _handleKeyPress(type, charCode) {
+    if(charCode === 13) {
+      switch(type) {
+      case 'details': return this._handleClickSave();
+      case 'create': return this._handleClickCreate();
+      default: return null;
+      }
+    }
+  }
+
 
   render() {
     const {
-      _handelChangeEdit,
+      _handleChangeEdit,
       _handleChangeCreate,
       _handleChangeSearch,
       _handleClickDelete,
       _handleClickCreate,
       _handleClickEdit,
       _handleClickList,
-      _handleClickSave
+      _handleClickSave,
+      _handleKeyPress,
     } = this; 
     const { searchKeyword, contactData, selectedContact, isEditing, createdContact } = this.state;
     return <Contacts
@@ -166,11 +178,12 @@ class App extends Component {
       onClickEdit={_handleClickEdit}
       onClickSave={_handleClickSave}
       onClickDelete={_handleClickDelete}
-      onChangeEdit={_handelChangeEdit}
+      onChangeEdit={_handleChangeEdit}
       createdName={createdContact.name}
       createdPhone={createdContact.phone}
       onChangeCreate={_handleChangeCreate}
-      onClickCreate={_handleClickCreate} />;
+      onClickCreate={_handleClickCreate}
+      onKeyPress={_handleKeyPress} />;
   }
 
 }

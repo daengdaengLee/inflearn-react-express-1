@@ -15,6 +15,7 @@ const ContactDetails = ({
   onClickSave,
   onClickDelete,
   onChange,
+  onKeyPress,
 }) => (
   <Column>
     <Heading
@@ -35,7 +36,8 @@ const ContactDetails = ({
             name={name}
             phone={phone}
             onChange={onChange}
-            onClick={onClickSave} />
+            onClick={onClickSave}
+            onKeyPress={onKeyPress} />
         : id === -1
           ? <Row>Not Selected</Row>
           : <ContactInfo

@@ -20,6 +20,7 @@ const Contacts = ({
   createdPhone,
   onChangeCreate,
   onClickCreate,
+  onKeyPress
 }) => {
   return (
     <Fragment>
@@ -36,12 +37,14 @@ const Contacts = ({
         onClickEdit={onClickEdit}
         onClickSave={onClickSave}
         onClickDelete={onClickDelete}
-        onChange={onChangeEdit} />
+        onChange={onChangeEdit}
+        onKeyPress={event => onKeyPress('details', event.charCode)} />
       <ContactCreate
         name={createdName}
         phone={createdPhone}
         onChangeCreate={onChangeCreate}
-        onClickCreate={onClickCreate} />
+        onClickCreate={onClickCreate}
+        onKeyPress={event => onKeyPress('create', event.charCode)} />
     </Fragment>
   );
 };

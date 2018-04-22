@@ -4,7 +4,7 @@ import Heading from '../../1-atoms/Heading';
 import InputText from '../../1-atoms/InputText';
 import ButtonText from '../../1-atoms/ButtonText';
 
-const ContactForm = ({ heading, button, name, phone, onChange, onClick }) => {
+const ContactForm = ({ heading, button, name, phone, onChange, onClick, onKeyPress }) => {
   return (
     <Column>
       <Heading
@@ -18,7 +18,8 @@ const ContactForm = ({ heading, button, name, phone, onChange, onClick }) => {
         name="phone"
         placeholder="phone"
         value={phone}
-        onChange={event => onChange('phone', event.target.value)} />
+        onChange={event => onChange('phone', event.target.value)}
+        onKeyPress={onKeyPress} />
       <ButtonText
         onClick={onClick} >{button}</ButtonText>
     </Column>
