@@ -152,7 +152,6 @@ class App extends Component {
     }
   }
 
-
   render() {
     const {
       _handleChangeEdit,
@@ -184,6 +183,21 @@ class App extends Component {
       onChangeCreate={_handleChangeCreate}
       onClickCreate={_handleClickCreate}
       onKeyPress={_handleKeyPress} />;
+  }
+
+  componentDidMount() {
+    const contactData = localStorage.contactData;
+    if(contactData) {
+      this.setState({
+        contactData: JSON.parse(contactData),
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(JSON.stringify(prevState.contactData) !== JSON.stringify(this.state.contactData)) {
+      localStorage.contactData = JSON.stringify(this.state.contactData);
+    }
   }
 
 }
